@@ -9,13 +9,15 @@ session = requests.Session()
 session.mount('http://', requests.adapters.HTTPAdapter(max_retries=3))
 raw_data = session.get(api_url)
 
-plot = figure(tools=TOOLS
-              title="Data from Quandl WIKI set",
-              x_axis_label='date',
-              y_axis_type='datetime')
-
-script, div = components(plot)
-return render_template('graph.html', script=script, div=div)
+@app.route()
+def main():
+    plot = figure(tools=TOOLS
+                  title="Data from Quandl WIKI set",
+                  x_axis_label='date',
+                  y_axis_type='datetime')
+    
+    script, div = components(plot)
+    return render_template('graph.html', script=script, div=div)
 
 if __name__ == '__main__':
     app.run(port=33507)
