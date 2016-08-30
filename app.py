@@ -4,14 +4,15 @@ from bokeh.plotting import figure
 from bokeh.embed import components
 
 
-api_url = 'https://www.quandl.com/api/v1/datasets/WIKI/%s.json' % stock
+api_url = 'https://www.quandl.com/api/v1/datasets/WIKI/%s.json' # % Stock
 session = requests.Session()
 session.mount('http://', requests.adapters.HTTPAdapter(max_retries=3))
 raw_data = session.get(api_url)
 
-@app.route()
+app = Flask(__name__)
+@app.route('/index.html')
 def main():
-    plot = figure(tools=TOOLS
+    plot = figure(tools=TOOLS,
                   title="Data from Quandl WIKI set",
                   x_axis_label='date',
                   y_axis_type='datetime')
