@@ -12,7 +12,7 @@ raw_data = session.get(api_url)
 app = Flask(__name__)
 @app.route('/index.html')
 def main():
-    plot = figure(tools=TOOLS,
+    plot = figure(tools="pan,wheel_zoom,box_zoom,reset",
                   title="Data from Quandl WIKI set",
                   x_axis_label='date',
                   y_axis_type='datetime')
@@ -21,4 +21,4 @@ def main():
     return render_template('graph.html', script=script, div=div)
 
 if __name__ == '__main__':
-    app.run(port=33507)
+    app.run(port=33507,debug=True)
